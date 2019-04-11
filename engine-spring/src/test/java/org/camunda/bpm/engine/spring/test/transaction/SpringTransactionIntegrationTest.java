@@ -64,7 +64,8 @@ public class SpringTransactionIntegrationTest extends SpringProcessEngineTestCas
 
     // The hello() method will start the process. The process will wait in a user task
     userBean.hello();
-    assertEquals(0, jdbcTemplate.queryForLong("select count(*) from MY_TABLE"));
+    int results = jdbcTemplate.queryForObject("select count(*) from MY_TABLE", Integer.class);
+    assertEquals(0, results);
 
     // The completeTask() method will write a record to the 'MY_TABLE' table and complete the user task
     try {
@@ -75,7 +76,8 @@ public class SpringTransactionIntegrationTest extends SpringProcessEngineTestCas
     // Since the service task after the user tasks throws an exception, both
     // the record and the process must be rolled back !
     assertEquals("My Task", taskService.createTaskQuery().singleResult().getName());
-    assertEquals(0, jdbcTemplate.queryForLong("select count(*) from MY_TABLE"));
+    results = jdbcTemplate.queryForObject("select count(*) from MY_TABLE", Integer.class);
+    assertEquals(0, results);
 
     // Cleanup
     jdbcTemplate.execute("drop table MY_TABLE if exists;");
