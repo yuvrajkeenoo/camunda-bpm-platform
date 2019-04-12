@@ -21,9 +21,28 @@
   This is implemented as separate modules and not as profiles of the core module, in order
   to test the artifact that was compiled against Spring 3 (i.e. to ensure binary compatibility).
   -->
-  <modules>
-    <module>core</module>
-    <module>compatibility-test-spring4</module>
-    <module>compatibility-test-spring5</module>
-  </modules>
+  <profiles>
+    <profile>
+      <id>java7</id>
+      <activation>
+        <jdk>(,1.8)</jdk>
+      </activation>
+      <modules>
+        <!-- Spring 5 requires Java 8 -->
+        <module>core</module>
+        <module>compatibility-test-spring4</module>
+      </modules>
+    </profile>
+    <profile>
+      <id>java-other</id>
+      <activation>
+        <jdk>[1.8,)</jdk>
+      </activation>
+      <modules>
+        <module>core</module>
+        <module>compatibility-test-spring4</module>
+        <module>compatibility-test-spring5</module>
+      </modules>
+    </profile>
+  </profiles>
 </project>
