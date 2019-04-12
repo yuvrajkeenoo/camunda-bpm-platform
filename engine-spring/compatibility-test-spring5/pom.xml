@@ -13,6 +13,7 @@
   
   <properties>
     <version.spring.framework>5.1.6.RELEASE</version.spring.framework>
+    <version.hibernate>5.4.2.Final</version.hibernate>
   </properties>
   
   <dependencies>
@@ -21,6 +22,7 @@
       <groupId>org.camunda.bpm</groupId>
       <artifactId>camunda-engine-spring</artifactId>
       <scope>test</scope>
+      <!-- TODO: can be removed if Spring dependencies become "provided" -->
       <exclusions>
         <exclusion>
           <groupId>org.springframework</groupId>
@@ -48,31 +50,26 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
-<!--       <version>${version.spring}</version> -->
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>
-<!--       <version>${version.spring}</version> -->
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-tx</artifactId>
-<!--       <version>${version.spring}</version> -->
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-web</artifactId>
-<!--       <version>${version.spring}</version> -->
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
-<!--       <version>${version.spring}</version> -->
       <scope>test</scope>
     </dependency>
     
@@ -80,16 +77,14 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
-      <version>5.4.2.Final</version>
+      <version>${version.hibernate}</version>
       <scope>test</scope>
     </dependency>
     
-    <!-- TODO: consolidate with spring and parent -->
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
-      <version>4.12</version>
     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
@@ -108,6 +103,8 @@
             <dependenciesToScan>
                 <dependency>org.camunda.bpm:camunda-engine-spring</dependency>
             </dependenciesToScan>
+            <redirectTestOutputToFile>true</redirectTestOutputToFile>
+            <argLine>-XX:MaxPermSize=160m -Xmx768m</argLine>
         </configuration>
       </plugin>
     </plugins>

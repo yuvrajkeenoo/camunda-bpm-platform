@@ -46,6 +46,7 @@ public class Spring4TestHelper implements SpringTestHelper {
 
       @Override
       public void afterTestClass(TestContext testContext) throws Exception {
+        // ensures that the application context is not cached beyond this test
         testContext.markApplicationContextDirty(HierarchyMode.EXHAUSTIVE);
       }
     });
