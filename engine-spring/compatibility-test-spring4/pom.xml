@@ -13,7 +13,7 @@
   
   <properties>
     <version.spring.framework>4.3.23.RELEASE</version.spring.framework>
-    <version.hibernate>5.4.2.Final</version.hibernate>
+    <version.hibernate>5.1.16.Final</version.hibernate> <!-- latest version for Java 7 -->
   </properties>
   
   <dependencies>
@@ -73,10 +73,15 @@
       <scope>test</scope>
     </dependency>
     
-    <!-- Hibernate implementing JPA >= 2.1 (required by Spring 5) -->
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
+      <version>${version.hibernate}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
       <version>${version.hibernate}</version>
       <scope>test</scope>
     </dependency>
